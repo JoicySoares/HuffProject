@@ -7,13 +7,7 @@
 
 
 //frequência de cada caractere no arquivo
-int* countbytes(QString name);
-
-//exibe o array das frequências em hexa
-void hexa(int *array);
-
-//codifica o arquivo usando a arvore de huffman.
-QByteArray BinaryCode(QString name);
+int* readbytes(QString name);
 
 //transforma a codificação binaria em bytes
 QPair<QByteArray, int> toByteArray(QByteArray bits);
