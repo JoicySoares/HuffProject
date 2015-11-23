@@ -1,14 +1,14 @@
 #include "compress.h"
 
 //Conta a frequencia dos caracteres e coloca num bytearray
-int* countbytes( QString name){
+int* readbytes( QString name){
     int* array = new int[256];
     for(int i = 0; i<256; ++i){
          array[i] = 0;
     }
     QFile file(name);
 
-    Q_ASSERT_X(file.open(QIODevice::ReadOnly), "Read::countbytes", "file not found.");
+    Q_ASSERT_X(file.open(QIODevice::ReadOnly), "Read::readbytes", "file not found.");
 
     while (!file.atEnd()) {
          QByteArray line = file.read(1024);
@@ -82,7 +82,7 @@ QByteArray Head(int trash, int Tsize){
 //Vamos comprimir :)
 void compress(QString name,QString newname)
 {
-    int* freq = countbytes(name);//conta frequênica
+    int* freq = readbytes(name);//conta frequênica
     HuffTree* tree = new HuffTree(); //cria arvore com frequencia dos caracteres
     tree->buildHuffTree(freq);
     QHash<uchar, QByteArray> ref = tree->codeRef(freq); //pega a codificação em binario dos caracteres
