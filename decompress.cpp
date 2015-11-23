@@ -15,12 +15,11 @@ void decompress(QString name, QString local){
     if(!local.isEmpty()){
        OriginalName = changesLocal(OriginalName,local);
     }
-    qDebug()<<"VAI DESCOMPRIMIR";
+    qDebug()<<"Descomprimindo!";
     QByteArray TreeRep= file.read(Tsize);
-    //qDebug()<<TreeRep;
     HuffTree* tree = new HuffTree();
     tree->Rebuild(TreeRep);
-    //tree->showHuffTree();
+   
     QByteArray data;
     //Lendo o arquivo e passando para bits.
     while (!file.atEnd()) {
@@ -41,10 +40,7 @@ void decompress(QString name, QString local){
     //Lendo a arvore e copiando o nó para o arquivo
 
     for(int i=0;i<bitsize;++i){
-       // qDebug()<< "ENTROOOOOOOOOOU!";
         if(tree->transverse(bit.at(i))){
-         //   qDebug()<<tree->current()->m_content;
-         //RetrieveData.append(tree->current()->m_content);
             RetrieveData.append( tree->current()->m_content);
             tree->setCurrent();
         }
